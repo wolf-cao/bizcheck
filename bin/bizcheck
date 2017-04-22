@@ -13,7 +13,7 @@ program
 
 program
 	.command('add')
-	.description('Add a new template')
+	.description('Add a new biz project')
   .alias('a')
   .action(() => {
     require('../command/add')()
@@ -21,7 +21,7 @@ program
 
 program
 	.command('ls')
-	.description('List all the templates')
+	.description('List all the biz projects')
 	.alias('l')
 	.action(() => {
 		require('../command/list')()
@@ -35,13 +35,13 @@ program
     require('../command/init')()
   })
 
-program
-	.command('del')
-	.description('Delete a template')
-	.alias('d')
-	.action(() => {
-		require('../command/delete')()
-	})
+// program
+// 	.command('del')
+// 	.description('Delete a projects')
+// 	.alias('d')
+// 	.action(() => {
+// 		require('../command/delete')()
+// 	})
 
 program.parse(process.argv)
 
