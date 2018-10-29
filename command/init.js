@@ -6,31 +6,39 @@ const chalk = require('chalk')
 const config = require('../projects')
 
 module.exports = () => {
- 	co(function *() {
-  	let tplName = yield prompt('Template name: ')
-  	let projectName = yield prompt('Project name: ')
-  	let gitUrl
-  	let branch
+  co(function*() {
+    let tplName = yield prompt('Template name: ')
+    let projectName = yield prompt('Project name: ')
+    let gitUrl
+    let branch
 
-		if (!config.tpl[tplName]) {
-    	console.log(chalk.red('\n × Template does not exit!'))
-    	process.exit()
+    if (!config[tplName]) {
+      console.log(chalk.red('\n × Template does not exit!'))
+      process.exit()
+      return
     }
-		gitUrl = config.tpl[tplName].url
-		branch = config.tpl[tplName].branch
+    gitUrl = config[tplName].url
+    branch = config[tplName].branch
 
     let cmdStr = `git clone -b ${branch} ${gitUrl} ${projectName}`
 
-	  console.log(chalk.white('\n Start generating...'))
+    console.log(chalk.white('\n Start generating...'))
 
-	  exec(cmdStr, (error, stdout, stderr) => {
+    exec(cmdStr, (error, stdout, stderr) => {
       if (error) {
         console.log(error)
         process.exit()
       }
       console.log(chalk.green('\n √ Generation completed!'))
-      console.log(`\n cd ${projectName} && npm install \n`)
+      console.log(
+        chalk.red(
+          `\n Before start your project, \n you must reset the git push remote url!!`
+        )
+      )
+      console.log(`\n 1: cd ${projectName}`)
+      console.log(`\n 2: git remote set-url origin git@your_git_address `)
+      console.log(`\n 3: npm install\n\n`)
       process.exit()
-	  })
+    })
   })
 }
