@@ -1,6 +1,6 @@
 {
   "name": "bizcheck-cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "业务集成脚手架",
   "main": "index.js",
   "scripts": {

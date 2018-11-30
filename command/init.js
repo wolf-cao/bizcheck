@@ -36,7 +36,7 @@ module.exports = () => {
         )
       )
       console.log(`\n 1: cd ${projectName}`)
-      console.log(`\n 2: git remote set-url origin git@your_git_address `)
+      console.log(`\n 2: git remote set-url origin http://your_git_address `)
       console.log(`\n 3: git push -u origin master `)
       console.log(`\n 4: npm install\n\n`)
       process.exit()
