@@ -7,8 +7,9 @@ const config = require('../projects')
 
 module.exports = () => {
   co(function*() {
-    let tplName = yield prompt('Template name: ')
+    let tplName = yield prompt('Template name(mobile is "reactapp"): ')
     let projectName = yield prompt('Project name: ')
+    let projectGitUrl = yield prompt('Your project git HTTP url: ')
     let gitUrl
     let branch
 
@@ -29,16 +30,20 @@ module.exports = () => {
         console.log(error)
         process.exit()
       }
-      console.log(chalk.green('\n √ Generation completed!'))
+
+      // set git remote
+      exec(`git remote set-url origin ${projectGitUrl}`, {
+        cwd: `./${projectName}`
+      })
       console.log(
-        chalk.red(
-          `\n Before start your project, \n you must reset the git push remote url!!`
+        chalk.green(
+          '\n √ Generation completed! \n Thank you for using this tool!!'
         )
       )
-      console.log(`\n 1: cd ${projectName}`)
-      console.log(`\n 2: git remote set-url origin http://your_git_address `)
-      console.log(`\n 3: git push -u origin master `)
-      console.log(`\n 4: npm install\n\n`)
+      console.log('\n You can run commands below first:')
+      console.log(`\n 1. cd ${projectName}`)
+      console.log(`\n 2. npm install \n`)
+
       process.exit()
     })
   })
