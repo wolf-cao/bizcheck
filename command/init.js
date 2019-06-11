@@ -35,6 +35,11 @@ module.exports = () => {
       exec(`git remote set-url origin ${projectGitUrl}`, {
         cwd: `./${projectName}`
       })
+
+      // git push
+      exec(`git push -u origin master`, {
+        cwd: `./${projectName}`
+      })
       console.log(
         chalk.green(
           '\n √ Generation completed! \n Thank you for using this tool!!'
